@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OGSM 對照分享</title>
+<style>
+:root{
+  --bg:#f6f4ef; --paper:#ffffff; --ink:#1f2937; --mute:#5b6472; --line:#e3ded3;
+  --O:#2f3e8f; --Obg:#e8ebf8;
+  --G:#0f766e; --Gbg:#dff3f0;
+  --S:#b45309; --Sbg:#fdeccf;
+  --M:#be3a4d; --Mbg:#fbe3e6;
+  --ok:#166534; --okbg:#dcf3e1;
+  --sug:#8a5a00; --sugbg:#fff0c2;
+  --tbd:#9f1239; --tbdbg:#fde2e7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#1b1f27;overflow:hidden;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--ink)}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1280px;height:720px;position:relative;transform-origin:center center;flex:none;background:var(--bg);overflow:hidden}
+.slide{position:absolute;inset:0;padding:44px 64px 56px;display:none;flex-direction:column}
+.slide.on{display:flex}
+h1{font-size:44px;line-height:1.2;letter-spacing:.02em}
+h2{font-size:34px;line-height:1.25;margin-bottom:6px}
+.kicker{font-size:16px;letter-spacing:.18em;color:var(--mute);margin-bottom:8px;font-weight:600}
+.sub{font-size:20px;color:var(--mute);margin-bottom:18px}
+.tagO{color:var(--O)}.tagG{color:var(--G)}.tagS{color:var(--S)}.tagM{color:var(--M)}
+.pill{display:inline-block;padding:2px 12px;border-radius:99px;font-size:15px;font-weight:700;vertical-align:middle}
+.pO{background:var(--O);color:#fff}.pG{background:var(--G);color:#fff}.pS{background:var(--S);color:#fff}.pM{background:var(--M);color:#fff}
+.foot{position:absolute;left:64px;right:64px;bottom:18px;display:flex;justify-content:space-between;font-size:13px;color:var(--mute)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.row{display:flex;gap:16px}
+.grow{flex:1}
+
+/* slide 1 */
+.ogsm{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;flex:1;margin-top:6px}
+.ogsm .c{border-radius:20px;padding:22px 24px;display:flex;flex-direction:column;color:#fff}
+.ogsm .L{font-size:150px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.ogsm .en{font-size:20px;font-weight:700;opacity:.92;margin-top:6px}
+.ogsm .zh{font-size:36px;font-weight:800;margin-top:14px}
+.ogsm .q{font-size:22px;margin-top:8px;line-height:1.5;opacity:.97}
+.ogsm .ex{margin-top:auto;font-size:17px;line-height:1.55;background:rgba(255,255,255,.16);border-radius:10px;padding:10px 12px}
+.cO{background:var(--O)}.cG{background:var(--G)}.cS{background:var(--S)}.cM{background:var(--M)}
+.story{font-size:24px;margin-bottom:14px}
+.story b{font-weight:800}
+
+/* slide 2 */
+.facts{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:6px 0 16px}
+.fact{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center}
+.fact .n{font-size:38px;font-weight:800;color:var(--O);line-height:1.1}
+.fact .t{font-size:15px;color:var(--mute);margin-top:2px}
+.axes{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;flex:1}
+.ax{background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--O);border-radius:12px;padding:16px 16px;font-size:19px;line-height:1.55}
+.ax h3{font-size:22px;margin-bottom:6px;line-height:1.35}
+.ax .ti{display:inline-block;font-size:14px;color:var(--O);font-weight:700;margin-bottom:4px}
+.four{display:flex;gap:10px;margin-top:12px;font-size:17px;align-items:center}
+.four span.f{background:var(--Obg);color:var(--O);border-radius:99px;padding:4px 14px;font-weight:700}
+
+/* slide 3 map */
+.map{display:grid;grid-template-columns:300px 60px 1fr;gap:0 8px;flex:1;align-content:stretch}
+.map .l{background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--O);border-radius:10px;padding:8px 14px;font-size:17px;line-height:1.4;display:flex;align-items:center;margin:4px 0}
+.map .ar{display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--mute)}
+.map .r{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:4px 0}
+.gchip{background:var(--Gbg);border:1px solid #9fd5cd;color:#0b4f49;border-radius:10px;padding:8px 12px;font-size:16px;line-height:1.35;font-weight:600}
+.gchip b{color:var(--G)}
+
+/* slide 4 O */
+.bigO{background:var(--O);color:#fff;border-radius:20px;padding:30px 36px;font-size:38px;font-weight:800;line-height:1.4;margin-bottom:18px}
+.bigO small{display:block;font-size:18px;font-weight:500;opacity:.85;margin-bottom:8px;letter-spacing:.1em}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cols3 .card{font-size:19px;line-height:1.55}
+.cols3 .card h4{font-size:20px;margin-bottom:6px;color:var(--O)}
+
+/* slide 5 G */
+.ggrid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:14px;flex:1}
+.g{background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--G);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column}
+.g .code{font-size:30px;font-weight:800;color:var(--G)}
+.g .nm{font-size:20px;font-weight:700;margin:2px 0 6px;line-height:1.35}
+.g .ds{font-size:16px;color:var(--mute);line-height:1.5}
+.g .ax2{margin-top:auto;font-size:14px;color:var(--O);font-weight:700}
+
+/* S formula */
+.formula{display:flex;align-items:stretch;gap:10px;margin-bottom:16px}
+.fbox{flex:1;border-radius:14px;padding:12px 16px;font-size:18px;line-height:1.45;background:var(--paper);border:1px solid var(--line)}
+.fbox b{display:block;font-size:24px;margin-bottom:2px}
+.fop{display:flex;align-items:center;font-size:32px;font-weight:800;color:var(--mute)}
+.fbox.s0{background:var(--S);color:#fff;border:none}
+.fbox.s1{border-top:6px solid var(--S)}
+.demo{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;flex:1}
+.demo ul{list-style:none;font-size:19px;line-height:1.55}
+.demo li{margin-bottom:6px}
+.demo li i{font-style:normal;font-weight:800;color:var(--S);margin-right:6px}
+.res{display:grid;grid-template-rows:repeat(3,1fr);gap:10px}
+.res .r1{background:var(--paper);border:1px solid var(--line);border-left:8px solid var(--S);border-radius:10px;padding:10px 16px;font-size:18px;line-height:1.45}
+.res .r1 b{color:var(--S);font-size:19px}
+
+/* generic table */
+table{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{padding:8px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:17px;line-height:1.45}
+th{font-size:15px;letter-spacing:.06em;color:#fff}
+tr:last-child td{border-bottom:none}
+.tS th{background:var(--S)}.tM th{background:var(--M)}
+.tS td.k,.tM td.k{font-weight:800;white-space:nowrap}
+.tS td.k{color:var(--S)}.tM td.k{color:var(--M)}
+.tS td.gh{background:var(--Sbg);font-weight:800;color:var(--S);white-space:nowrap;width:130px}
+.tS td.gh small{display:block;font-weight:500;color:var(--mute);font-size:15px;margin-top:2px}
+.tS{table-layout:fixed}
+.tS td{font-size:18px;padding:12px 12px}
+.fill{display:inline-block;padding:1px 10px;border-radius:6px;background:var(--tbdbg);color:var(--tbd);font-weight:700;font-size:17px}
+.tM{table-layout:fixed}
+.tM td{padding:8px 10px;font-size:17px}
+.cell{display:inline;padding:1px 8px;border-radius:6px;font-weight:600}
+.ok{background:var(--okbg);color:var(--ok)}
+.sug{background:var(--sugbg);color:var(--sug)}
+.tbd{background:var(--tbdbg);color:var(--tbd)}
+.legend{display:flex;gap:14px;font-size:14px;align-items:center;margin-left:auto}
+.legend span{padding:1px 10px;border-radius:6px;font-weight:600}
+.hd{display:flex;align-items:flex-end;gap:12px;margin-bottom:10px}
+
+/* M formula */
+.mf{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.mf .card{border-top:6px solid var(--M);font-size:21px;line-height:1.5}
+.mf .card b{font-size:24px;color:var(--M);display:block}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1}
+.ba .card{font-size:22px;line-height:1.7}
+.ba .card h4{font-size:17px;letter-spacing:.1em;margin-bottom:8px}
+.ba .bad h4{color:var(--tbd)}.ba .good h4{color:var(--ok)}
+.ba .quote{font-size:26px;font-weight:700;line-height:1.55;margin:4px 0 8px}
+.blank{border-bottom:3px dotted var(--M);padding:0 22px;color:var(--M);font-weight:800}
+
+/* trace */
+.trace{display:grid;grid-template-columns:repeat(5,1fr);gap:0 18px;flex:1;align-content:start}
+.trace .th{font-size:17px;font-weight:800;letter-spacing:.1em;padding:4px 2px}
+.trace .c{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 14px;font-size:19px;line-height:1.5;position:relative;margin-bottom:12px}
+.trace .c::after{content:"→";position:absolute;right:-19px;top:50%;transform:translateY(-50%);color:var(--mute);font-size:18px;z-index:2}
+.trace .c.last::after{content:none}
+.trace .c1{border-left:6px solid var(--mute)}.trace .c2{border-left:6px solid var(--G)}.trace .c3{border-left:6px solid var(--S)}.trace .c4{border-left:6px solid var(--M)}.trace .c5{border-left:6px solid var(--O)}
+
+/* gaps */
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+.sum .card{text-align:center}
+.sum .n{font-size:52px;font-weight:800;line-height:1.1}
+.sum .t{font-size:17px;color:var(--mute)}
+.gaps{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1}
+.gaps .card{font-size:21px;line-height:1.65}
+.gaps h4{font-size:23px;margin-bottom:6px}
+.gaps li{margin-left:20px;margin-bottom:4px}
+
+#notes{position:fixed;left:0;right:0;bottom:0;background:rgba(15,23,42,.94);color:#e5e7eb;padding:14px 28px;font-size:18px;line-height:1.6;display:none;z-index:9;max-height:34vh;overflow:auto}
+#notes.on{display:block}
+#hint{position:fixed;right:14px;top:10px;color:#9ca3af;font-size:12px;z-index:5;opacity:.0;transition:opacity .3s}
+body:hover #hint{opacity:.8}
+#bar{position:fixed;left:0;bottom:0;height:4px;background:#f59e0b;z-index:8;transition:width .25s}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+
+<!-- 1 OGSM -->
+<section class="slide" data-note="先不講計畫。只講一件事：OGSM 是一個把計畫『說成一個故事』的框架。O 是結局，G 是拆成幾個具體目標，S 是用什麼辦法，M 是怎麼知道我們到了。四個字對應四個問題，今天的分享就是拿這四個問題去對我們的計畫。">
+  <div class="kicker">一個把計畫「說成故事」的框架</div>
+  <div class="ogsm">
+    <div class="c cO"><div class="L">O</div><div class="en">Objective</div><div class="zh">整體目標</div><div class="q">你們最終要幹嘛？<br>做完之後，世界有什麼不一樣？</div><div class="ex">一句話的結局<br>→ 故事的「最後一頁」</div></div>
+    <div class="c cG"><div class="L">G</div><div class="en">Goals</div><div class="zh">具體目標</div><div class="q">為了達成 O，要拆成哪幾件事？</div><div class="ex">每個 G 是一條<br>看得見的工作軸<br>→ 故事的「章節」</div></div>
+    <div class="c cS"><div class="L">S</div><div class="en">Strategies</div><div class="zh">策略</div><div class="q">用什麼辦法做？<br>需要哪些資源？</div><div class="ex">做法＋時間＋空間＋經費<br>→ 每章的「怎麼走」</div></div>
+    <div class="c cM"><div class="L">M</div><div class="en">Measures</div><div class="zh">衡量</div><div class="q">怎麼知道做到了？</div><div class="ex">做什麼 × 多少 × 何時<br>→ 每章的「驗收線」</div></div>
+  </div>
+  <div class="foot"><span>O → G → S → M：由大往小，也可以由小往大檢查</span><span>1</span></div>
+</section>
+
+<!-- 2 計畫架構 -->
+<section class="slide" data-note="這一頁是核定計畫書原本的樣子：五大工作主軸，用 CoLAP 四力當骨架。計畫期間 115 年 8 月 1 日到 116 年 7 月 31 日。注意：這是『我們原本怎麼寫計畫』的語言，OGSM 是換一種語言重新說一次。">
+  <div class="kicker">115 學年度素養深耕的專業培力與課綱協作計畫｜核定計畫書</div>
+  <h2>我們的計畫：五大工作主軸，以四力為骨架</h2>
+  <div class="facts">
+    <div class="fact"><div class="n">12 個月</div><div class="t">2026/08/01 – 2027/07/31</div></div>
+    <div class="fact"><div class="n">79 場</div><div class="t">四力工作坊</div></div>
+    <div class="fact"><div class="n">15+</div><div class="t">外部專業資源</div></div>
+    <div class="fact"><div class="n">13 人</div><div class="t">赴日考察輔導員</div></div>
+    <div class="fact"><div class="n">2 場</div><div class="t">ACER 專家工作坊</div></div>
+  </div>
+  <div class="axes">
+    <div class="ax"><span class="ti">主軸一</span><h3>運用既有數位平台，完善課程運作</h3>開課、審查、講師、報名、出席、作業、回饋的學習歷程管理</div>
+    <div class="ax"><span class="ti">主軸二</span><h3>發展四力課程，完善募課與成效評估</h3>計畫邀請＋公開募課雙軌；Guskey 五層次問卷</div>
+    <div class="ax"><span class="ti">主軸三</span><h3>深化中央與地方合作</h3>縣市合作方案（團體申請）；彙整合作經驗供擴散</div>
+    <div class="ax"><span class="ti">主軸四</span><h3>國際交流與評量工具應用</h3>日本教育考察；澳洲 ACER 非認知能力評量合作</div>
+    <div class="ax"><span class="ti">主軸五</span><h3>培育專題講師、支持中央輔導團</h3>每月回流增能；期初／期中／期末、團務、遴選</div>
+  </div>
+  <div class="four"><b>四力框架：</b><span class="f">專業力 62 場</span><span class="f">教練力 11 場</span><span class="f">領導力／組織力 6 場</span></div>
+  <div class="foot"><span>來源：115央團_核定計劃書.pdf（壹、肆、伍、表 1、表 3、表 5）</span><span>2</span></div>
+</section>
+
+<!-- 3 對照總圖 -->
+<section class="slide" data-note="這一頁是整場的主線：計畫書的五個主軸，經過 OGSM 拆解，變成 8 個 G。注意不是一對一：主軸一拆成 G1 平台、G2 說明宣導、G3 參與管理；主軸二拆成 G4 募課、G5 公版；主軸三的縣市合作掛在 G2 的衡量指標；主軸四拆成 G7 ACER 與 G8 日本；主軸五對應 G6。">
+  <div class="kicker">怎麼對照</div>
+  <h2>計畫書的五大主軸 → OGSM 的 8 個具體目標（G）</h2>
+  <div class="sub">整體目標 O：以四力為核心，建立可持續運作的教師專業培力機制</div>
+  <div class="map">
+    <div class="l"><div><b>主軸一</b>　數位平台與學習歷程管理</div></div><div class="ar">→</div>
+    <div class="r"><div class="gchip"><b>G1</b> 學習護照平臺</div><div class="gchip"><b>G2</b> 課程說明與宣導</div><div class="gchip"><b>G3</b> 課程參與管理</div></div>
+    <div class="l"><div><b>主軸二</b>　四力課程、募課、成效評估</div></div><div class="ar">→</div>
+    <div class="r"><div class="gchip"><b>G4</b> 募課與外部資源</div><div class="gchip"><b>G5</b> 課程結構化與公版</div></div>
+    <div class="l"><div><b>主軸三</b>　縣市合作與經驗擴散</div></div><div class="ar">→</div>
+    <div class="r"><div class="gchip"><b>G2</b> 的衡量指標（M2.2–M2.5）承接</div></div>
+    <div class="l"><div><b>主軸四</b>　日本考察＋ACER 合作</div></div><div class="ar">→</div>
+    <div class="r"><div class="gchip"><b>G7</b> ACER Co-Lab 興舟計畫</div><div class="gchip"><b>G8</b> 國際參訪合作</div></div>
+    <div class="l"><div><b>主軸五</b>　專題講師與中央輔導團支持</div></div><div class="ar">→</div>
+    <div class="r"><div class="gchip"><b>G6</b> 核心研究教師角色調整</div></div>
+  </div>
+  <div class="foot"><span>來源：計畫書主軸 ↔ 115央團計畫_專案知識資產_ACER.xlsx「使用前設定」；對應為整理建議，團隊可再調整</span><span>3</span></div>
+</section>
+
+<!-- 4 O -->
+<section class="slide" data-note="O 要回答：我們最終要幹嘛。重點是一句話，而且要是『結局』不是『活動』。這句話我們寫成：以四力為核心，建立可持續運作的教師專業培力機制。注意『可持續運作』四個字，它決定了後面 G 為什麼要有平台、公版、SOP。">
+  <div class="kicker"><span class="pill pO">O</span>　整體目標</div>
+  <h2>故事的最後一頁：我們最終要幹嘛？</h2>
+  <div class="bigO"><small>OBJECTIVE</small>以四力為核心，建立可持續運作的<br>教師專業培力機制</div>
+  <div class="cols3">
+    <div class="card"><h4>整合什麼</h4>課程資訊、學習歷程、參與管理，整合在同一個機制裡。</div>
+    <div class="card"><h4>留下什麼</h4>建立「可複用」的課程與任務團隊，換人也能接得起來。</div>
+    <div class="card"><h4>連結什麼</h4>連結 ACER、日本參訪及外部資源，把交流成果轉化為教學實踐。</div>
+  </div>
+  <div class="foot"><span>來源：「使用前設定」整體目標（O）與內容與範圍</span><span>4</span></div>
+</section>
+
+<!-- 5 G -->
+<section class="slide" data-note="G 是把 O 拆成八個看得見的工作軸。檢查方法：每個 G 都要能用一句話回答『這條線做完，O 就往前一步』。八個 G 裡，G1–G3 是機制，G4–G5 是課程，G6 是人，G7–G8 是國際。">
+  <div class="kicker"><span class="pill pG">G</span>　具體目標</div>
+  <h2>把 O 拆成 8 條看得見的工作軸</h2>
+  <div class="ggrid">
+    <div class="g"><div class="code">G1</div><div class="nm">學習護照平臺建置</div><div class="ds">建置學習護照平台與學習歷程管理機制</div><div class="ax2">主軸一</div></div>
+    <div class="g"><div class="code">G2</div><div class="nm">課程說明優化與宣導</div><div class="ds">優化課程說明與宣導機制，提升課程參與（含縣市合作）</div><div class="ax2">主軸一／三</div></div>
+    <div class="g"><div class="code">G3</div><div class="nm">課程參與管理機制</div><div class="ds">建立課程參與管理與學習歷程追蹤機制</div><div class="ax2">主軸一</div></div>
+    <div class="g"><div class="code">G4</div><div class="nm">募課與外部資源盤點</div><div class="ds">盤點募課與外部資源，拓展課程供給</div><div class="ax2">主軸二</div></div>
+    <div class="g"><div class="code">G5</div><div class="nm">課程結構化與公版建置</div><div class="ds">推動課程結構化與公版建置，促進課程複製應用</div><div class="ax2">主軸二</div></div>
+    <div class="g"><div class="code">G6</div><div class="nm">核心研究教師角色調整</div><div class="ds">調整角色，強化課程發展與教學支持</div><div class="ax2">主軸五</div></div>
+    <div class="g"><div class="code">G7</div><div class="nm">ACER Co-Lab 興舟計畫</div><div class="ds">推動 ACER Co-Lab 與合作計畫，促進跨域共創</div><div class="ax2">主軸四</div></div>
+    <div class="g"><div class="code">G8</div><div class="nm">國際參訪合作</div><div class="ds">拓展國際參訪與合作，建立國際交流網絡</div><div class="ax2">主軸四</div></div>
+  </div>
+  <div class="foot"><span>來源：「使用前設定」G1–G8</span><span>5</span></div>
+</section>
+
+<!-- 6 S 公式 -->
+<section class="slide" data-note="S 不只是『做什麼』。目前我們的 S 只寫了做法，沒寫資源。一個完整的策略要像人家問你『你打算怎麼做』時，你能回答：做什麼、什麼時候、在哪裡、花多少錢。用 G8 日本參訪當示範，因為它的時間、空間都比較完整。經費欄的數字等經費表對齊後補上。">
+  <div class="kicker"><span class="pill pS">S</span>　策略</div>
+  <h2>S ＝ 做法 ＋ 資源（時間、空間、經費）</h2>
+  <div class="formula">
+    <div class="fbox s0"><b>做法</b>用什麼辦法</div><div class="fop">＋</div>
+    <div class="fbox s1"><b>時間</b>什麼時候做、做多久</div><div class="fop">＋</div>
+    <div class="fbox s1"><b>空間</b>在哪裡做、用什麼場域</div><div class="fop">＋</div>
+    <div class="fbox s1"><b>經費</b>需要多少錢、用在哪</div>
+  </div>
+  <div class="card" style="margin-bottom:12px;padding:10px 18px;font-size:18px"><span class="pill pG">示範</span>　<b>G8 國際參訪合作</b></div>
+  <div class="demo">
+    <div class="card"><ul>
+      <li><i>S8.1</i>辦理遴選與行前讀書會，各組形成十大關注議題與提問</li>
+      <li><i>S8.2</i>海外學校／機構參訪、跨國拜會、每日晚間復盤</li>
+      <li><i>S8.3</i>官方考察報告、返國分享、教學實踐轉化建議</li>
+      <li><i>S8.4</i>追蹤採購：契約、交通膳宿、保險、履約、驗收、付款、歸檔</li>
+    </ul></div>
+    <div class="res">
+      <div class="r1"><b>時間</b>　8 月前置與採購 → 8–9 月讀書會 → <b style="color:var(--ink)">10/18–10/25 出訪</b> → 11–12 月回流分享 → 1 月期中分享 → 1–2 月成果分析</div>
+      <div class="r1"><b>空間</b>　日本現地學校／機構（13 人）＋ 國內讀書會與分享場地</div>
+      <div class="r1"><b>經費</b>　<span class="fill">NT$ ＿＿＿＿＿ 待填</span>　採購履約的交通膳宿、保險、口譯等，依經費表科目</div>
+    </div>
+  </div>
+  <div class="foot"><span>來源：「使用前設定」S8.1–S8.4；計畫書表 5；履約期 10/18–10/25 為 M8.2 來源</span><span>6</span></div>
+</section>
+
+<!-- 7 S 資源 G1-G4 -->
+<section class="slide" data-note="這是把八個 G 的資源補齊的第一半。時間欄來自計畫書表 5 的月份標示；空間欄來自計畫書寫的辦理方式（線上／實體／混成）；經費欄目前空白，要和經費總表對齊後補數字。">
+  <div class="hd"><div><div class="kicker"><span class="pill pS">S</span>　策略的資源 1／2</div><h2 style="margin-bottom:0">G1–G4：機制與課程供給</h2></div></div>
+  <table class="tS">
+    <colgroup><col style="width:128px"><col style="width:292px"><col style="width:270px"><col style="width:250px"><col style="width:176px"></colgroup>
+    <tr><th>G</th><th>做法（S）</th><th>時間</th><th>空間</th><th>經費</th></tr>
+    <tr><td class="gh">G1<small>學習護照平臺</small></td><td>整合課程資料庫與學習護照；串接報名、出席、作業、回饋；以實際課程試行匯入與查詢</td><td>2026/08 部署上線測試；08–09 壓力測試；09–06 人才庫建置；2027/02 優化</td><td>既有數位平台（線上）；系統開發維運由既有平台團隊負責，本計畫不編列</td><td><span class="fill">待填</span></td></tr>
+    <tr><td class="gh">G2<small>說明與宣導</small></td><td>統一課程說明；公文＋學管科長會議宣導；依縣市需求安排線上／實體／混成合作</td><td>2026/08–09 縣市洽談與需求盤點；2026/10–2027/05 合作方案辦理；公文與會議日期待確認</td><td>公文與學管科長會議（場地待確認）；縣市現場或線上</td><td><span class="fill">待填</span></td></tr>
+    <tr><td class="gh">G3<small>參與管理</small></td><td>明確報名、出席、取消責任；記錄出席、作業、回饋；依 Guskey 五層次蒐集成效</td><td>全年；成效分析 2027/02、2027/06–07</td><td>平台線上紀錄；課後問卷</td><td><span class="fill">待填</span></td></tr>
+    <tr><td class="gh">G4<small>募課與資源</small></td><td>依四力盤點缺口；計畫邀請＋公開募課雙軌；建立外部資源名錄</td><td>課程盤點全年；募課審查 2026/09–10，第 2 輪 2027/03–04</td><td>審查會議（線上／實體，待確認）；外部團隊連結 15+</td><td><span class="fill">待填</span></td></tr>
+  </table>
+  <div class="foot"><span>時間：計畫書表 5 與「使用前設定」；空間：計畫書伍；經費：待對照經費總表</span><span>7</span></div>
+</section>
+
+<!-- 8 S 資源 G5-G8 -->
+<section class="slide" data-note="第二半。G5 的 79 場是最大的資源消耗，場次已經有，場地與鐘點費要對經費表。G7 的 ACER 要特別注意：採購與招標在 8 月，所以前置作業早就開始。">
+  <div class="hd"><div><div class="kicker"><span class="pill pS">S</span>　策略的資源 2／2</div><h2 style="margin-bottom:0">G5–G8：課程、人、國際</h2></div></div>
+  <table class="tS">
+    <colgroup><col style="width:128px"><col style="width:292px"><col style="width:270px"><col style="width:250px"><col style="width:176px"></colgroup>
+    <tr><th>G</th><th>做法（S）</th><th>時間</th><th>空間</th><th>經費</th></tr>
+    <tr><td class="gh">G5<small>結構化與公版</small></td><td>四力課程模組；公版流程與評量規準；共備與講師籌備；沉澱課程與 SOP</td><td>全年開 79 場；共備 25＋籌備 15＋規劃 12 場會議</td><td>線上／實體／混成；教練力以實體互動為主</td><td><span class="fill">待填</span></td></tr>
+    <tr><td class="gh">G6<small>講師角色調整</small></td><td>角色改任務導向；每月整天回流增能；支援期初／期中／期末與遴選</td><td>回流 2026/09–2027/06 每月 1 場；專業成長 2026/08、2027/02、2027/06</td><td>實體整天回流；央團活動場地待確認</td><td><span class="fill">待填</span></td></tr>
+    <tr><td class="gh">G7<small>ACER 興舟</small></td><td>專家工作坊＋跨國工作會議；AMS 測試、學校試辦、社群與入校觀課；前後測與分析</td><td>工作坊 2026/08–09、2027/01–02；入校觀課 12–2 月、4–6 月；前後測 09–06</td><td>工作坊場地（待確認）；合作學校現場；跨國會議</td><td><span class="fill">待填</span></td></tr>
+    <tr><td class="gh">G8<small>國際參訪</small></td><td>遴選＋行前讀書會；海外參訪與復盤；官方報告與返國分享；採購履約歸檔</td><td>8–9 月讀書會；10/18–10/25 出訪；11–12 月回流分享；1–2 月成果分析</td><td>日本現地（13 人）；國內讀書會、分享場地</td><td><span class="fill">待填</span></td></tr>
+  </table>
+  <div class="foot"><span>時間：計畫書表 3、表 5 與「使用前設定」；空間：計畫書伍；經費：待對照經費總表</span><span>8</span></div>
+</section>
+
+<!-- 9 M 公式 -->
+<section class="slide" data-note="M 的重點：不是『有做』，而是『做到什麼程度、什麼時候做完』。每個 M 都要同時有三個東西：做什麼、多少、何時。左邊這個是原本版本的樣子，有時間沒數量；右邊是補完後的樣子。">
+  <div class="kicker"><span class="pill pM">M</span>　衡量</div>
+  <h2>M ＝ 做什麼 × 多少 × 何時</h2>
+  <div class="mf">
+    <div class="card"><b>做什麼</b>可觀察的成果，不是「努力」</div>
+    <div class="card"><b>多少</b>場次、人數、件數、完成率</div>
+    <div class="card"><b>何時</b>哪一天或哪一個月之前</div>
+  </div>
+  <div class="ba">
+    <div class="card bad"><h4>少一格：只有時間，沒有數量</h4>
+      <div class="quote">M2.3　完成縣市需求盤點與第一批申請受理</div>
+      時間：盤點 2026/08–09；受理 2026/12 底<br>
+      數量：<span class="blank">　</span> 個縣市　<span class="blank">　</span> 件申請<br>
+      <span style="color:var(--mute);font-size:16px">計畫書列有 6 個既有合作縣市，可作盤點基數，受理件數要團隊定</span></div>
+    <div class="card good"><h4>三格齊全</h4>
+      <div class="quote">M7.1　辦理 ACER 專家工作坊</div>
+      數量：<b>共 2 場</b><br>
+      時間：<b>2026/08–09、2027/01–02</b><br>
+      <span style="color:var(--mute);font-size:16px">計畫書 §伍四(二)、表 4、表 5 三處一致</span></div>
+  </div>
+  <div class="foot"><span>M2.3、M7.1 取自「使用前設定」；結構檢查：每個 M 數量欄、時間欄都要有值</span><span>9</span></div>
+</section>
+
+<!-- 10-13 M tables generated -->
+<section class="slide" id="m1" data-note="綠色是計畫書或來源文件寫明的；黃色是前一版寫的『建議值』，還沒經團隊確認；紅色是目前還缺的。這一頁 G1–G3 缺的主要是日期：平台驗收日、宣導日、名單規則實施日。"></section>
+<section class="slide" id="m2" data-note="G4、G5 大多已有數字，因為 79 場、15 個、25＋15＋12 場會議計畫書都寫了。缺的是 M5.2 公版完成期限與 M5.5 資產件數。"></section>
+<section class="slide" id="m3" data-note="G6 的數字多來自計畫書與講師任務說明，但學年結算日還沒定。"></section>
+<section class="slide" id="m4" data-note="G7 缺口最多：合作學校數、樣本數、測試通過條件都還沒有。G8 的日期有一個要核對：計畫書表 5 把出國放在 9 月，採購履約期是 10/18–10/25。"></section>
+
+<!-- 14 trace -->
+<section class="slide" data-note="最後示範怎麼用這套對照。從計畫書任何一句話，都能走到某個 G、某個 S、某個 M；反過來，從 M 也能回頭找到計畫書出處。以三條線示範。">
+  <div class="kicker">怎麼用</div>
+  <h2>從計畫書一句話，一路對到 G、S、M</h2>
+  <div class="trace">
+    <div class="th">計畫書原文</div><div class="th tagG">G 目標</div><div class="th tagS">S 策略</div><div class="th tagM">M 衡量</div><div class="th tagO">期程（表 5）</div>
+    <div class="c c1">全年預計辦理 79 場工作坊（專業力 62、教練力 11、領導力／組織力 6）</div>
+    <div class="c c2"><b>G5</b> 課程結構化與公版</div>
+    <div class="c c3"><b>S5.1</b> 依四力建立課程模組</div>
+    <div class="c c4"><b>M5.1</b> 79 場<br>2027/07/31 前</div>
+    <div class="c c5 last">課程盤點與開課辦理：全年（8–7 月）</div>
+    <div class="c c1">邀請 ACER 專家辦理 2 場專業工作坊</div>
+    <div class="c c2"><b>G7</b> ACER Co-Lab 興舟</div>
+    <div class="c c3"><b>S7.1</b> 專家工作坊、跨國工作會議</div>
+    <div class="c c4"><b>M7.1</b> 2 場<br>2026/08–09、2027/01–02</div>
+    <div class="c c5 last">辦理賦能工作坊：8–9 月、1–2 月</div>
+    <div class="c c1">選派 13 名輔導員赴日考察；返國辦理分享與成果整理</div>
+    <div class="c c2"><b>G8</b> 國際參訪合作</div>
+    <div class="c c3"><b>S8.1–8.3</b> 行前讀書會、參訪復盤、返國分享</div>
+    <div class="c c4"><b>M8.1</b> 13 人<br><b>M8.2</b> 10/18–10/25<br><b>M8.4</b> 分享 2026/11–12</div>
+    <div class="c c5 last">讀書會 8–9 月；回流分享 11–12 月；期中分享 1 月</div>
+  </div>
+  <div class="foot"><span>三條線都走得通＝計畫書與 OGSM 在這三處一致</span><span>14</span></div>
+</section>
+
+<!-- 15 gaps -->
+<section class="slide" id="gaps" data-note="收尾：把還缺的講清楚，這樣大家知道下一步要補什麼。S 缺經費數字；M 有一批缺數量或缺日期。這些要團隊一起決定，不是我們單方面填。">
+  <div class="kicker">目前進度與下一步</div>
+  <h2>S 與 M 補完資源與時間數量後，還剩這些要決定</h2>
+  <div class="sum" id="sum"></div>
+  <div class="gaps">
+    <div class="card"><h4 class="tagS">S：資源欄</h4><ul>
+      <li>時間、空間：已依計畫書補上，場地多處標「待確認」</li>
+      <li>經費：8 個 G 的金額尚未對照經費總表</li>
+      <li>計畫年度欄位仍寫 114–115 學年，要改 2026/08/01–2027/07/31</li>
+    </ul></div>
+    <div class="card"><h4 class="tagM">M：數量與時間</h4><ul id="gaplist"></ul></div>
+  </div>
+  <div class="foot"><span>統計由 M 表自動計算</span><span>15</span></div>
+</section>
+
+</div></div>
+
+<div id="notes"></div>
+<div id="hint">← → 換頁　N 講者提示　F 全螢幕</div>
+<div id="bar"></div>
+
+<script>
+/* ---- M 資料：[代碼, 衡量什麼, 數量, 數量狀態, 時間, 時間狀態] ---- */
+const M=[
+["M1.1","完成學習護照平台及整合資料庫驗收","1 套","sug","上線與驗收日待確認","tbd"],
+["M1.2","建立課程分類、教材及學習歷程紀錄原則","1 份原則定稿","sug","2026/12 底","sug"],
+["M1.3","課程留存可查核的參與與學習成果紀錄","79 場，留存率 100%","sug","2027/07/31","sug"],
+["M2.1","完成課程資訊修訂與審核","修訂率 100%","sug","宣導前，日期待確認","tbd"],
+["M2.2","完成正式公文與學管科長會議宣導","公文＋會議；場次、縣市數待定","tbd","期程待確認","tbd"],
+["M2.3","完成縣市需求盤點與第一批申請受理","既有 6 縣市；受理件數待定","tbd","盤點 2026/08–09；受理 2026/12 底","sug"],
+["M2.4","擴展縣市課程合作","4 個以上縣市","sug","2027/06 底","sug"],
+["M2.5","累積縣市合作案例與參與人次","案例 3 份以上；人次待定","sug","2027/05–07","sug"],
+["M3.1","確保參與紀錄與學習歷程可追蹤","完整率 100%","sug","學期末，日期待確認","tbd"],
+["M3.2","完成參與及缺席名單管理規則","1 份規則","sug","實施日待決議","tbd"],
+["M3.3","蒐集課後成效回饋並完成分析","問卷回收率 70%；分析 2 次","sug","2027/01–02、2027/06–07","ok"],
+["M4.1","連結並導入外部優質資源","15 個以上","ok","2027/07/31","ok"],
+["M4.2","完成邀課與公開募課、提案共同審查","募課 2 輪；審查率 100%","ok","2026/09–10、2027/03–04","sug"],
+["M5.1","開設四力工作坊並保留分類成果","79 場（62／11／6）","ok","2027/07/31","ok"],
+["M5.2","完成結構化課程公版並追蹤應用","完成率 100%；應用數待定","sug","期限待確認","tbd"],
+["M5.3","辦理共備及講師籌備會議","共備 25 場；籌備 15 場","ok","全年","ok"],
+["M5.4","辦理課程運作及資料運用規劃會議","12 場","ok","全年","ok"],
+["M5.5","累積可複用課程、共備及 SOP 資產","件數、應用次數待定","tbd","期限待確認","tbd"],
+["M6.1","完成任務團隊角色與責任調整","1 份角色／分工文件","sug","公告日待確認","tbd"],
+["M6.2","辦理專題講師實體回流增能","每月 1 場，共 10 次","sug","2026/09–2027/06","ok"],
+["M6.3","達成專題講師個人服務場次","全職每人 30、兼職每人 12 場","ok","學年結算日待確認","tbd"],
+["M6.4","達成四力工作坊主講場次","全職每人 6、兼職每人 4 場","ok","學年結算日待確認","tbd"],
+["M6.5","完成講師服務紀錄","留存率 100%","ok","全年","ok"],
+["M6.6","辦理央團期初、期中、期末專業成長","3 場","ok","2026/08、2027/02、2027/06","ok"],
+["M6.7","支援團務及遴選會議並追蹤決議","團務 4＋遴選 4 場","ok","全年","ok"],
+["M7.1","辦理 ACER 專家工作坊","2 場","ok","2026/08–09、2027/01–02","ok"],
+["M7.2","完成 AMS 測試與本土合作學校試辦","學校數、樣本數待定","tbd","入校觀課 12–2 月、4–6 月（表 5）","sug"],
+["M7.3","完成前後測資料蒐集與成果分析","樣本數、完成率待定","tbd","分析 2027/01、2027/07","ok"],
+["M7.4","累積 ACER 合作與跨單位成果","合作計畫數、成果數待定","tbd","期限待確認","tbd"],
+["M8.1","完成參訪遴選、行前準備與成果整理","13 人；十大議題","ok","出發前截止日待確認","tbd"],
+["M8.2","完成國際參訪、拜會及每日復盤","場次、資源連結數待定","tbd","2026/10/18–10/25","ok"],
+["M8.3","完成出國考察官方報告繳交","繳交率 100%","ok","期限待確認（子計畫 2027/01/13）","tbd"],
+["M8.4","完成返國分享及課程轉化","課程轉化 3 項以上","sug","分享 2026/11–12；轉化 2027/02 前","sug"],
+["M8.5","完成參訪採購履約、驗收、付款與歸檔","必備文件完整率 100%","sug","履約 10/18–10/25；結案日待確認","tbd"]
+];
+const LBL={ok:"明確",sug:"建議",tbd:"待定"};
+function cell(t,s){return `<span class="cell ${s}">${t}</span>`}
+function mTable(el,title,sub,prefixes,note){
+  const rows=M.filter(r=>prefixes.some(p=>r[0].startsWith(p)));
+  el.innerHTML=`<div class="hd"><div><div class="kicker"><span class="pill pM">M</span>　${sub}</div><h2 style="margin-bottom:0">${title}</h2></div>
+   <div class="legend"><span class="ok">明確：計畫書或來源已寫</span><span class="sug">建議：待團隊確認</span><span class="tbd">待定：尚缺</span></div></div>
+   <table class="tM"><colgroup><col style="width:78px"><col style="width:420px"><col style="width:340px"><col style="width:310px"></colgroup>
+   <tr><th>代碼</th><th>衡量什麼</th><th>數量</th><th>時間</th></tr>`+
+   rows.map(r=>`<tr><td class="k">${r[0]}</td><td>${r[1]}</td><td>${cell(r[2],r[3])}</td><td>${cell(r[4],r[5])}</td></tr>`).join("")+`</table>
+   <div class="foot"><span>${note}</span><span class="pg"></span></div>`;
+}
+const src="來源：「使用前設定」M 欄與目標值／期限；對照計畫書表 3、表 4、表 5。狀態為整理判斷";
+mTable(document.getElementById("m1"),"G1–G3：平台、宣導、參與管理","衡量 1／4",["M1.","M2.","M3."],src);
+mTable(document.getElementById("m2"),"G4–G5：募課與課程公版","衡量 2／4",["M4.","M5."],src);
+mTable(document.getElementById("m3"),"G6：講師與央團支持","衡量 3／4",["M6."],src);
+mTable(document.getElementById("m4"),"G7–G8：ACER 與日本參訪","衡量 4／4",["M7.","M8."],src);
+
+/* 摘要 */
+(function(){
+  let c={ok:0,sug:0,tbd:0};
+  M.forEach(r=>{c[r[3]]++;c[r[5]]++});
+  const tot=M.length*2;
+  document.getElementById("sum").innerHTML=
+   `<div class="card"><div class="n" style="color:var(--ok)">${c.ok}</div><div class="t">格明確（共 ${tot} 格＝${M.length} 項 M × 數量／時間）</div></div>
+    <div class="card"><div class="n" style="color:var(--sug)">${c.sug}</div><div class="t">格是建議值，待團隊確認</div></div>
+    <div class="card"><div class="n" style="color:var(--tbd)">${c.tbd}</div><div class="t">格尚缺，要團隊決定</div></div>`;
+  const noN=M.filter(r=>r[3]==="tbd").map(r=>r[0]).join("、");
+  const noT=M.filter(r=>r[5]==="tbd").map(r=>r[0]).join("、");
+  document.getElementById("gaplist").innerHTML=
+   `<li>缺數量（${M.filter(r=>r[3]==="tbd").length} 項）：${noN}</li><li>缺時間（${M.filter(r=>r[5]==="tbd").length} 項）：${noT}</li>`;
+})();
+
+/* ---- 換頁引擎 ---- */
+const slides=[...document.querySelectorAll(".slide")];
+let cur=0;
+const stage=document.getElementById("stage"),notes=document.getElementById("notes"),bar=document.getElementById("bar");
+slides.forEach((s,i)=>{const p=s.querySelector(".pg");if(p)p.textContent=i+1});
+function show(i){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>s.classList.toggle("on",k===cur));
+  notes.textContent=slides[cur].dataset.note||"";
+  bar.style.width=((cur+1)/slides.length*100)+"%";
+  try{history.replaceState(null,"","#"+(cur+1))}catch(e){}
+}
+function fit(){
+  const k=Math.min(innerWidth/1280,innerHeight/720);
+  stage.style.transform=`scale(${k})`;
+}
+addEventListener("resize",fit);
+addEventListener("keydown",e=>{
+  if(["ArrowRight","PageDown"," ","Enter"].includes(e.key)){e.preventDefault();show(cur+1)}
+  else if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();show(cur-1)}
+  else if(e.key==="Home")show(0);
+  else if(e.key==="End")show(slides.length-1);
+  else if(e.key==="n"||e.key==="N")notes.classList.toggle("on");
+  else if(e.key==="f"||e.key==="F"){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+});
+document.getElementById("viewport").addEventListener("click",e=>{
+  if(e.clientX>innerWidth/2)show(cur+1);else show(cur-1);
+});
+fit();
+const h=parseInt(location.hash.slice(1));show(isNaN(h)?0:h-1);
+</script>
+</body>
+</html>
